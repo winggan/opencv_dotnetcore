@@ -6,6 +6,9 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.sln
+
+cpp_warpper/vs/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
