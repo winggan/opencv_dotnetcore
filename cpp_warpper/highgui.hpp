@@ -8,7 +8,7 @@
 extern "C" {
 #endif // __cplusplus
 
-  OPENCV_API void* _CDECL coreCvImread(const char *path, int flag);
+  OPENCV_API void _CDECL coreCvImread(const char *path, int flag, void *mat);
   OPENCV_API int/*bool*/ _CDECL coreCvImwrite(const char *path, void *mat);
 
 #ifdef __cplusplus

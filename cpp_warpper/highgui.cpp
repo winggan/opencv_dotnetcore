@@ -4,12 +4,10 @@
 extern "C" {
 #endif // __cplusplus
 
-  void* _CDECL coreCvImread(const char *path, int flag)
+  void _CDECL coreCvImread(const char *path, int flag, void *mat)
   {
-    cv::Mat *p = (cv::Mat *)coreCvCreateMat();
-    if (!p) return p;
-    *p = cv::imread(path, flag);
-    return p;
+    if (!path || !mat) return;
+    *(cv::Mat *)mat = cv::imread(path, flag);
   }
   int/*bool*/ _CDECL coreCvImwrite(const char *path, void *mat)
   {
