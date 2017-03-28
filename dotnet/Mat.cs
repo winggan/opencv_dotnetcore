@@ -277,7 +277,7 @@ namespace CoreCV
 				int count = 0;
 				int rows = Rows;
 				for (int i = 0; i < rows; i++)
-					count += copyRow<T>(dst, startIndex + count);
+					count += copyRow<T>(i, dst, startIndex + count);
 
 				return count;
 			}
@@ -337,7 +337,7 @@ namespace CoreCV
 				int rows = Rows;
 				int step = Cols * ElementSize / Marshal.SizeOf<T>();
 				for (int i = 0; i < rows && ret; i++)
-					ret = ret && copyRow<T>(src, startIndex + i * step, step);
+					ret = ret && copyRow<T>(i, src, startIndex + i * step, step);
 
 				return ret;
 			}

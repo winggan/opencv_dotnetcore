@@ -1,5 +1,6 @@
 #include "core.hpp"
 #include <new>
+#include <vector>
 
 #ifdef __cplusplus
 extern "C" {
@@ -66,12 +67,56 @@ extern "C" {
     *(cv::Mat *)dst = ((cv::Mat *)src)->clone();
   }
 
-  OPENCV_API void _CDECL coreCvConvertMat(void *src, void *dst, int dstType, double alpha, double beta)
+  void _CDECL coreCvConvertMat(void *src, void *dst, int dstType, double alpha, double beta)
   {
     if (!src || !dst)
       return;
     
     ((cv::Mat *)src)->convertTo(*(cv::Mat *)dst, dstType, alpha, beta);
+  }
+  
+  void _CDECL coreCvAssignMat(void *src, void *dst)
+  {
+    if (!src || !dst)
+      return;
+    *(cv::Mat *)dst = *((cv::Mat *)src);
+  }
+
+  void _CDECL coreCvSplit(void *src, void *dsts, int maxChannel)
+  {
+    if (!src || !dsts)
+      return;
+    cv::Mat &srcMat = *(cv::Mat*)src;
+    if (maxChannel < srcMat.channels())
+      return;
+    
+    int channels = srcMat.channels();
+    cv::Mat **dstMats = (cv::Mat **)dsts;
+    for (int i = 0; i < channels; i++)
+      if (!dstMats[i]) return;
+    
+    std::vector<cv::Mat> tmp;
+    cv::split(srcMat, tmp);
+    
+    for (int i = 0; i < channels; i++)
+      *dstMats[i] = tmp[i];
+  }
+  void _CDECL coreCvMerge(void *srcs, int n, void *dst)
+  {
+    if (!srcs || !dst)
+      return;
+
+    cv::Mat **srcMats = (cv::Mat **)srcs;
+    for (int i = 0; i < n; i++)
+      if (!srcMats[i]) return;
+    
+    std::vector<cv::Mat> tmp;
+    tmp.reserve(n);
+    for (int i = 0; i < n; i++)
+      tmp.push_back(*srcMats[i]);
+
+    cv::Mat &dstMat = *(cv::Mat *)dst;
+    cv::merge(tmp, dstMat);
   }
 
 #ifdef __cplusplus

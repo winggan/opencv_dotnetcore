@@ -7,6 +7,7 @@
 extern "C" {
 #endif // __cplusplus
 
+#if 1 // cv::Mat
   OPENCV_API void* _CDECL coreCvCreateEmptyMat();
   OPENCV_API void* _CDECL coreCvCreateMat(int rows, int cols, int type);
   OPENCV_API void _CDECL coreCvdestroyMat(void *mat);
@@ -29,6 +30,13 @@ extern "C" {
 
   OPENCV_API void _CDECL coreCvCloneMat(void *src, void *dst);
   OPENCV_API void _CDECL coreCvConvertMat(void *src, void *dst, int dstType, double alpha, double beta);
+  OPENCV_API void _CDECL coreCvAssignMat(void *src, void *dst);
+#endif 
+
+#if 1 // core routines
+  OPENCV_API void _CDECL coreCvSplit(void *src, void *dsts, int maxChannel);
+  OPENCV_API void _CDECL coreCvMerge(void *srcs, int n, void *dst);
+#endif
 
 #ifdef __cplusplus
 }
