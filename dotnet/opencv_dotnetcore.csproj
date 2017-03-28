@@ -4,6 +4,10 @@
     <TargetFramework>netstandard1.6</TargetFramework>
     <RootNamespace>CoreCV</RootNamespace>
     <AssemblyName>CoreCV</AssemblyName>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <Description />
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

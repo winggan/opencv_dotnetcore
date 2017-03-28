@@ -5,9 +5,13 @@
 extern "C" {
 #endif // __cplusplus
 
-  void* _CDECL coreCvCreateMat()
+  void* _CDECL coreCvCreateEmptyMat()
   {
     return new (std::nothrow) cv::Mat();
+  }
+  void* _CDECL coreCvCreateMat(int rows, int cols, int type)
+  {
+    return new (std::nothrow) cv::Mat(rows, cols, type);
   }
   void _CDECL coreCvdestroyMat(void *mat)
   {
@@ -49,11 +53,26 @@ extern "C" {
   {
     return ((cv::Mat*)mat)->elemSize();
   }
-  int/*bool*/ _CDECL corCvIsEmpty(void *mat)
+  int/*bool*/ _CDECL coreCvIsEmpty(void *mat)
   {
     return ((cv::Mat*)mat)->empty();
   }
 
+  void _CDECL coreCvCloneMat(void *src, void *dst)
+  {
+    if (!src || !dst)
+      return;
+
+    *(cv::Mat *)dst = ((cv::Mat *)src)->clone();
+  }
+
+  OPENCV_API void _CDECL coreCvConvertMat(void *src, void *dst, int dstType, double alpha, double beta)
+  {
+    if (!src || !dst)
+      return;
+    
+    ((cv::Mat *)src)->convertTo(*(cv::Mat *)dst, dstType, alpha, beta);
+  }
 
 #ifdef __cplusplus
 }

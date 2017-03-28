@@ -7,7 +7,8 @@
 extern "C" {
 #endif // __cplusplus
 
-  OPENCV_API void* _CDECL coreCvCreateMat();
+  OPENCV_API void* _CDECL coreCvCreateEmptyMat();
+  OPENCV_API void* _CDECL coreCvCreateMat(int rows, int cols, int type);
   OPENCV_API void _CDECL coreCvdestroyMat(void *mat);
 
   //rest of the funtions assume pointer "mat" is valid for efficiency
@@ -24,7 +25,10 @@ extern "C" {
 
   OPENCV_API int/*bool*/ _CDECL coreCvIsContinuous(void *mat);
   OPENCV_API int _CDECL coreCvGetElementSize(void *mat);
-  OPENCV_API int/*bool*/ _CDECL corCvIsEmpty(void *mat);
+  OPENCV_API int/*bool*/ _CDECL coreCvIsEmpty(void *mat);
+
+  OPENCV_API void _CDECL coreCvCloneMat(void *src, void *dst);
+  OPENCV_API void _CDECL coreCvConvertMat(void *src, void *dst, int dstType, double alpha, double beta);
 
 #ifdef __cplusplus
 }
