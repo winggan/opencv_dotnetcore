@@ -93,5 +93,18 @@ namespace CoreCV
 				.Append(", ")
 				.Append(y.ToString()).Append(")").ToString();
 		}
+
+		// implicit conversion operator itself can not has any generic parameter
+		// so this explicit conversion method is create 
+		// further more that is a "safe" way to force user to use explicit conversion
+		public Point<V> toPoint<V>() where V : struct, IConvertible, IComparable<V>, IComparable, IEquatable<V>, IFormattable
+		{
+			return new Point<V>(
+					GenericConverter<T, V>.convert(x),
+					GenericConverter<T, V>.convert(y)
+				);
+		}
+
 	}
+
 }

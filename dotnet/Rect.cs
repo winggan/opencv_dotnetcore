@@ -139,5 +139,18 @@ namespace CoreCV
 				.Append(", ").Append(height.ToString())
 				.Append("]").ToString();
 		}
+
+		// implicit conversion operator itself can not has any generic parameter
+		// so this explicit conversion method is create 
+		// further more that is a "safe" way to force user to use explicit conversion
+		public Rect<V> toRect<V>() where V : struct, IConvertible, IComparable<V>, IComparable, IEquatable<V>, IFormattable
+		{
+			return new Rect<V>(
+					GenericConverter<T, V>.convert(x),
+					GenericConverter<T, V>.convert(y),
+					GenericConverter<T, V>.convert(width),
+					GenericConverter<T, V>.convert(height)
+				);
+		}
 	}
 }
