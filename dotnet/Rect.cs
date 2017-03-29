@@ -134,9 +134,9 @@ namespace CoreCV
 		public override string ToString()
 		{
 			return new StringBuilder("[").Append(x.ToString())
-				.Append(",").Append(y.ToString())
-				.Append(",").Append(width.ToString())
-				.Append(",").Append(height.ToString())
+				.Append(", ").Append(y.ToString())
+				.Append(", ").Append(width.ToString())
+				.Append(", ").Append(height.ToString())
 				.Append("]").ToString();
 		}
 	}

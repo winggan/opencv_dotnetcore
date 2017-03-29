@@ -7,18 +7,9 @@ using System.Linq.Expressions;
 namespace CoreCV
 {
 	// borrow idea from http://www.yoda.arachsys.com/csharp/genericoperators.html
-	public class GenericArithmetic<T> 
+	internal class GenericArithmetic<T> 
 		where T: struct, IConvertible, IComparable<T>, IComparable, IEquatable<T>, IFormattable
 	{
-
-		public static readonly Func<T, T, T> add       = initAdder();
-		public static readonly Func<T, T, T> substract = initSubstractor();
-		public static readonly Func<T, T, T> multiply  = initMultiplier();
-		public static readonly Func<T, T, T> divide    = intiDivider();
-		public static readonly Func<T, T, bool> gt	   = initGreaterThan();
-		public static readonly Func<T, T, bool> lt	   = initLessThan();
-		public static readonly Func<T, T, bool> eq     = initEqual();
-
 		public static readonly Type[] supportTypes = {
 			typeof(sbyte),
 			typeof(byte),
@@ -34,6 +25,14 @@ namespace CoreCV
 			typeof(decimal),
 			typeof(System.Numerics.BigInteger),
 		};
+
+		public static readonly Func<T, T, T> add       = initAdder();
+		public static readonly Func<T, T, T> substract = initSubstractor();
+		public static readonly Func<T, T, T> multiply  = initMultiplier();
+		public static readonly Func<T, T, T> divide    = intiDivider();
+		public static readonly Func<T, T, bool> gt     = initGreaterThan();
+		public static readonly Func<T, T, bool> lt     = initLessThan();
+		public static readonly Func<T, T, bool> eq     = initEqual();
 
 		public static readonly T zero = initZero();
 
