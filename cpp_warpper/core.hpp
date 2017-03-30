@@ -31,6 +31,7 @@ extern "C" {
   OPENCV_API void _CDECL coreCvCloneMat(void *src, void *dst);
   OPENCV_API void _CDECL coreCvConvertMat(void *src, void *dst, int dstType, double alpha, double beta);
   OPENCV_API void _CDECL coreCvAssignMat(void *src, void *dst);
+  OPENCV_API void _CDECL coreCvMatRoi(void *src, int x, int y, int w, int h, void *dst);
 #endif 
 
 #if 1 // core routines

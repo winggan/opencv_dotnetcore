@@ -92,8 +92,12 @@ namespace CoreCV
 
 			[DllImport(Platform.NativeLibName, CallingConvention = CallingConvention.Cdecl)]
 			extern static public void coreCvConvertMat(IntPtr src, IntPtr dst, int dstType, double alpha, double beta);
+
+			[DllImport(Platform.NativeLibName, CallingConvention = CallingConvention.Cdecl)]
+			extern static public void coreCvMatRoi(IntPtr src, int x, int y, int w, int h, IntPtr dst);
 			//OPENCV_API void _CDECL coreCvCloneMat(void *src, void *dst);
 			//OPENCV_API void _CDECL coreCvConvertMat(void* src, void* dst, int dstType, double alpha, double beta);
+			//OPENCV_API void _CDECL coreCvMatRoi(void* src, int x, int y, int w, int h, void* dst);
 		}
 
 		public int Rows => IntPtr.Zero != matObj ? NativeInvoker.coreCvGetRows(matObj) : -1;
@@ -153,6 +157,24 @@ namespace CoreCV
 			if (!ret.Valid) return null;
 			NativeInvoker.coreCvCloneMat(MatObj, ret.MatObj);
 			return ret;
+		}
+
+		public Mat roi(Rect<int> r)
+		{
+			Mat ret = new Mat();
+			if (!ret.Valid) return null;
+			NativeInvoker.coreCvMatRoi(MatObj, r.x, r.y, r.width, r.height, ret.MatObj);
+			return ret;
+		}
+
+		public Mat col(int c)
+		{
+			return roi(new Rect<int>(c, 0, 1, Rows));
+		}
+
+		public Mat row(int r)
+		{
+			return roi(new Rect<int>(0, r, Cols, 1));
 		}
 
 		public void convertTo(Mat dst, int type, double alpha = 1.0, double beta = 0.0)
