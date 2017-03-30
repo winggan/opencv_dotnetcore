@@ -87,9 +87,9 @@ extern "C" {
     if (!src || !dst)
       return;
     cv::Rect roi(x, y, w, h);
-    cv::Mat &srcMat = *((cv::Mat *)src);
+    const cv::Mat &srcMat = *((cv::Mat *)src);
     if (x >= 0 && y >= 0 && x + w <= srcMat.cols && y + h <= srcMat.rows)
-      *(cv::Mat *)dst = (*(cv::Mat *)src)(cv::Rect());
+      *(cv::Mat *)dst = srcMat(roi);
   }
 
   void _CDECL coreCvSplit(void *src, void *dsts, int maxChannel)
