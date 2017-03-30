@@ -398,5 +398,33 @@ namespace CoreCV
 			else
 				return false;
 		}
+
+		
+		public static implicit operator Mat (System.Numerics.Matrix3x2 m)
+		{
+			Mat ret = new Mat(2, 3, makeType(1, MatDepth.CV_32F));
+			if (!ret.Valid)
+				return null;
+			if (ret.copyAll(m.getRawData(), 0, 6))
+				return ret;
+			else
+				return null;
+		}
+
+	}
+
+	internal static class helper
+	{
+		public static float[] getRawData(this System.Numerics.Matrix3x2 m)
+		{
+			float[] ret = new float[6];
+			ret[0] = m.M11;
+			ret[1] = m.M21;
+			ret[2] = m.M31;
+			ret[3] = m.M12;
+			ret[4] = m.M22;
+			ret[5] = m.M32;
+			return ret;
+		}
 	}
 }

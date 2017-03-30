@@ -9,6 +9,8 @@ namespace CoreCV
 		public const string NativeLibName = "opencv_dotnetcore";
 		private static void test()
 		{
+			System.Numerics.Matrix3x2 m;
+			
 		}
     }
 }
