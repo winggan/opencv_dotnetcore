@@ -2,7 +2,7 @@
 {
 	public partial class ImgprocRoutine
     {
-		public enum CvtColorCode
+		public enum CvtColorCode : int
 		{
 			CV_BGR2BGRA = 0,
 			CV_RGB2RGBA = CV_BGR2BGRA,

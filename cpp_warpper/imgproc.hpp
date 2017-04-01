@@ -8,6 +8,10 @@ extern "C" {
 #endif // __cplusplus
 
   OPENCV_API void _CDECL coreCvCvtColor(void *src, void *dst, int code);
+  OPENCV_API void _CDECL coreCvWarpAffine(void *src, void *dst, void* trans, int outputW, int outputH, 
+                                          int flags, int borderMode, double *borderValue);
+  OPENCV_API void _CDECL coreCvResize(void *src, void *dst, int outputW, int outputH, 
+                                      double fx, double fy, int interpolation);
 
 #ifdef __cplusplus
 }
