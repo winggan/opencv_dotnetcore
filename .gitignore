@@ -9,6 +9,7 @@
 *.sln
 
 cpp_warpper/vs/
+cpp_warpper/vs_x86/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
